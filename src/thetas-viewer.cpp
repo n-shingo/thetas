@@ -14,6 +14,7 @@
 #define WIDTH 1024
 #define HEIGHT 768
 #define DELTA_DEG 4  // 矢印キーによる移動量[deg]
+#define DEFAULT_ANGLE_SCALE 500
 
 using namespace std;
 using namespace cv;
@@ -95,7 +96,7 @@ int main(int argc, char ** argv)
 	cerr << "Main Loop Started" << endl;
 
 	int a_deg = 0, b_deg = 0;
-	double angle_scale = 400.0;
+	double angle_scale = DEFAULT_ANGLE_SCALE;
 	while(!gShutOff){
 		
 		int key = waitKey(1);
@@ -121,10 +122,13 @@ int main(int argc, char ** argv)
 			angle_scale *= 1.125;
 		else if( key == 'x' )
 			angle_scale /= 1.125;
-
-        else if( key == 'a' ){
+        else if( key == 'a' )
 			whole_angle = (whole_angle + 1 ) % 4;
+		else if( key == 'r' ){
+			a_deg = b_deg = 0.0;
+			angle_scale = DEFAULT_ANGLE_SCALE;
 		}
+		
         
         // key == Esc, 'q'
         if( key == 27 || key == 'q'){
@@ -279,10 +283,11 @@ void showHelp(void)
 	
 	// 使用方法
 	fprintf( stdout, "\n\033[1m使用方法\033[0m\n" );
-	fprintf( stdout, "\t%-18s仰角と方位角の向きを%d度ずつ変更する\n", "矢印キー", DELTA_DEG );
+	fprintf( stdout, "\t%-18s視点の仰角と方位角の向きを%d度ずつ変更する\n", "矢印キー", DELTA_DEG );
 	fprintf( stdout, "\t%-16s表示画像を90度回転させる\n", "A キー" );
 	fprintf( stdout, "\t%-16s画角を狭くする(ズームイン)\n", "Z キー" );
 	fprintf( stdout, "\t%-16s画角を広げる(ズームアウト)\n", "X キー" );
+	fprintf( stdout, "\t%-16s視点の方向と画角をリセットする\n", "R キー" );
 	fprintf( stdout, "\n" );
 
 	// フッター

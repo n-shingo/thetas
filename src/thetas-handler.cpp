@@ -102,7 +102,6 @@ int main(int argc, char ** argv)
     //==========================================================
 	cerr << "Main Loop Started" << endl;
 
-    int cnt = 0;
     while( !gShutOff )
     {
 		int key;
@@ -110,13 +109,8 @@ int main(int argc, char ** argv)
 		cap >> frm;
 
         Mat_to_ImageC3_HD720p(frm, &cam_image.data);
-
 	
-		if(cnt%3 == 0)
-    	    cam_image.write();
-
-		cnt++;	
-
+        cam_image.write();
 
 		key = waitKey(1);
 		switch(key){

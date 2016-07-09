@@ -20,7 +20,7 @@ typedef struct
 
 // プロトタイプ宣言
 void Mat_to_ImageC3_HD720p( cv::Mat src, ImageC3_HD720p *dst );
-void ImageC3_HD720p_to_Mat( ImageC3_HD720p src, cv::Mat *dst );
+void ImageC3_HD720p_to_Mat( ImageC3_HD720p &src, cv::Mat *dst );
 
 // 関数定義
 void Mat_to_ImageC3_HD720p( cv::Mat src, ImageC3_HD720p *dst )
@@ -28,10 +28,10 @@ void Mat_to_ImageC3_HD720p( cv::Mat src, ImageC3_HD720p *dst )
 	memcpy( dst->image, src.data, sizeof(char)*HD720P_WIDTH*HD720P_HEIGHT*3);
 }
 
-void ImageC3_HD720p_to_Mat( ImageC3_HD720p src, cv::Mat *dst )
+void ImageC3_HD720p_to_Mat( ImageC3_HD720p &src, cv::Mat *dst )
 {
-	cv::Mat t1( cv::Size(HD720P_WIDTH, HD720P_HEIGHT), CV_8UC3, src.image);
-	*dst = t1;
+	cv::Mat t3( cv::Size(HD720P_WIDTH, HD720P_HEIGHT), CV_8UC3, src.image);
+	*dst = t3.clone();
 }
 
 
