@@ -1,1 +1,7 @@
-thetas_viewer
+CMakeCache.txt
+CMakeFiles/
+Makefile
+bin/
+cmake_install.cmake
+.gitignore.swp
+
